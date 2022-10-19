@@ -20,14 +20,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/")
-    public String printUsers(ModelMap model, @RequestParam("count") Optional<Integer> count) {
+    @GetMapping
+    public String printUsers(ModelMap model, @RequestParam() Optional<Integer> count) {
         model.addAttribute("users", userService.getUserList(count.orElse(100)));
         model.addAttribute("user_model", new User());
         return "index";
     }
 
-    @GetMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public String deleteUser(ModelMap model, @PathVariable long id) {
         userService.deleteUser(id);
         model.addAttribute("users", userService.getUserList(100));

@@ -3,7 +3,6 @@ package com.example.demo.dao;
 import com.example.demo.model.User;
 import org.springframework.stereotype.Repository;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -15,10 +14,13 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
     public User getUserById(long id) {
+
         return entityManager.find(User.class, id);
     }
+
     public List<User> getUserList(int count) {
-        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
+        return entityManager.createQuery(
+                "SELECT u FROM User u", User.class).getResultList();
     }
 
     public void deleteUser(long id) {
